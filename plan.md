@@ -8,4 +8,5 @@
 - [x] Introduction to buildEnv
 - [x] Create rootfs
 - [x] Decide on init system
-- [] Boot it!
+- [x] Boot it!
+- [] Run a window manager

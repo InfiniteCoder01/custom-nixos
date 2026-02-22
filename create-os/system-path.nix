@@ -32,7 +32,7 @@
     rootfs.links."/usr" = config.system.build.system-path;
     rootfs.links."/etc" = pkgs.linkFarm "etc" (lib.mapAttrsToList (name: value: {
       inherit name;
-      path = pkgs.writeText name value.text;
+      path = if value ? text then pkgs.writeText name value.text else value.link;
     }) config.environment.etc);
   };
 }

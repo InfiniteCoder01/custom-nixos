@@ -4,7 +4,7 @@ for ((i = 0; i < ${#targets[@]}; i++)); do
     ln -s "${sources[$i]}" "$out${targets[$i]}"
 done
 
-mkdir "$out/proc" "$out/sys" "$out/tmp"
+mkdir "$out/proc" "$out/sys" "$out/tmp" "$out/dev" "$out/run"
 
 # Copy nix store
 mkdir -p "$out/nix/store"
