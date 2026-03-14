@@ -5,8 +5,10 @@ for ((i = 0; i < ${#targets[@]}; i++)); do
 done
 
 mkdir "$out/proc" "$out/sys" "$out/tmp" "$out/dev" "$out/run"
+ln -s "usr/etc" "$out/etc"
 
 # Copy nix store
+echo Copying store paths...
 mkdir -p "$out/nix/store"
 for path in $(< "$closureInfo/store-paths"); do
     cp -a "$path" "$out/$path"

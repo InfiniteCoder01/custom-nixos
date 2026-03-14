@@ -11,7 +11,7 @@
     };
   
     gen-img = pkgs.writeShellScriptBin "gen-img" ''
-      dd if=/dev/null of=image.img bs=1M seek=1024
+      dd if=/dev/null of=image.img bs=1M seek=2048
       ${pkgs.e2fsprogs}/bin/mkfs.ext4 image.img
       ${pkgs.lkl.out}/bin/cptofs -t ext4 -i image.img ${custom-nixos.config.system.build.rootfs}/* /
     '';
@@ -24,7 +24,7 @@
     };
 
     qemu = pkgs.writeShellScriptBin "run-qemu" ''
-      ${pkgs.qemu}/bin/qemu-system-x86_64 -enable-kvm -drive format=raw,file=image.img -kernel ${kernel}/x86_64/bzImgKernel6LLVMx8664 -nographic -append "root=/dev/sda console=ttyS0 init=/init" 
+      ${pkgs.qemu}/bin/qemu-system-x86_64 -enable-kvm -serial mon:stdio -device virtio-gpu -drive format=raw,file=image.img -kernel ${kernel}/x86_64/bzImgKernel6LLVMx8664 -append "root=/dev/sda rw console=ttyS0 init=/init"
     '';
   };
 }
